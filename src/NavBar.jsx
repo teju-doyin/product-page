@@ -9,7 +9,7 @@ import deleteIcon from './images/icon-delete.svg'
 import { NavLink } from 'react-router-dom'
 import { useState } from 'react'
 
-export default function NavBar() {
+export default function NavBar({cartNumber}) {
     const [showMenu, setShowMenu]= useState(false)
     const [message, setMessage]= useState('')
     const [items, setItems] = useState(1)
@@ -32,12 +32,16 @@ export default function NavBar() {
         setItems(0)
 
     }
-    // const items = 3
+    const newcartNumber = cartNumber * 125
+    const cartTotal = newcartNumber.toFixed(2)
     const handleOpenCart=()=>{
-        setShowCartDetails(c=>!showCartDetails)
+        setShowCartDetails(c=>true)
+    }
+    const handleCloseCart=()=>{
+        setShowCartDetails(c=>false)
     }
     const linkActive = ({isActive})=>
-            isActive? ' link-active ':'text-black bottom-border relative' 
+            isActive? ' link-active ':'text-black  bottom-border relative' 
     const handleOpenMenu=()=> {
         setShowMenu(o=>!showMenu)
     }
@@ -67,22 +71,25 @@ export default function NavBar() {
                 </div>
             </div>
             <div className="right-nav relative flex justify-center gap-5 items-center ">
-                <span className={items===0? ' hidden ':'top-0  left-2 text-xs absolute bg-orange text-white px-2 rounded-lg cursor-default '}>
-                    {items}</span>
+                <span className={cartNumber===0? ' hidden ':'top-0  left-2 text-xs absolute bg-orange text-white px-2 rounded-lg cursor-default '}>
+                    {cartNumber}</span>
                 <img onClick={handleOpenCart} className='img w-5 h-5 cursor-pointer ' src={cart} alt="cart" />
                 <img className=' img w-8 rounded-2xl border border-solid hover:border-orange cursor-pointer transition delay-75' src={avatar} alt="avatar" />
             </div>
         </div>
-        <div className={showCartDetails? 'shadow top-16 bg-white right-0 absolute w-10/12 px-4 max-w-xs z-50 rounded-xl py-5':'hidden'}>
-                <h5 className='text-black font-semibold ml-3' >Cart</h5>
+        <div className={showCartDetails? 'shadow top-16 bg-white right-3 absolute w-[17rem] px-4 md:w-[20rem] z-50 rounded-xl py-5':'hidden'}>
+                <div className="flex justify-between items-center">
+                    <h5 className='text-black font-semibold ml-3' >Cart</h5>
+                    <img onClick={handleCloseCart} width={15} className='cursor-pointer' src={closeIcon} alt="" />
+                </div>
                 <div className="line my-6 one-px bg-grayishBlue"></div>
                 { emptyCart? (
                     <div className=''>
-                        <div className="cart-items mb-5 flex justify-between items-center w-full mx-auto ">
+                        <div className="cart-items mb-5 flex justify-between gap-5 items-center w-full mx-auto ">
                             <img className='img w-14 rounded' src={thumbnail} alt="" />
                             <div className="item-details text-darkGrayishBlue">
                                 <p className=' text-sm  '>Fall Limited Edition Sneakers</p>
-                                <p className="price">$125.00 x {items} <span className='text-black font-semibold'>${items * 125.0}</span></p>
+                                <p className="price">$125.00 x {cartNumber} <span className='text-black font-semibold'>${cartTotal}</span></p>
                             </div>
                             <img className='img cursor-pointer ' onClick={handleDelete} src={deleteIcon} alt="" />
                         </div>
@@ -95,7 +102,7 @@ export default function NavBar() {
 
                 }
             {isButtonVisible && (
-                <Button onClick={handleEmptyCart} > Checkout</Button>
+                <Button  onClick={handleEmptyCart} > Checkout</Button>
             )}
         </div>
     </nav>

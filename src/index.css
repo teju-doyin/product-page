@@ -53,3 +53,7 @@
 .shadow{
   box-shadow: 14px 28px 112px -14px rgba(0,0,0,0.64)
 }
+.link-active{
+  color: hsl(26, 100%, 55%) ;
+  opacity: .8;
+}

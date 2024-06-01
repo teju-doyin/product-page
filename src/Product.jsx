@@ -3,13 +3,9 @@ import plus from './images/icon-plus.svg'
 import Button from './Button.jsx'
 import { useState } from 'react'
 
-const Product = () => {
-    const [itemCounter, setItemCounter] = useState(0)
-    const handleAdd =()=> setItemCounter(c=>itemCounter+1)
-    const handleRemove =()=> setItemCounter(c=>itemCounter-1)
-    const handleAddToCart=()=> {
-        setItemCounter(0)
-    }
+const Product = ({handleAddToCart,itemCounter,handleRemove,handleAdd}) => {
+    
+    
   return (
     <div className="product-container  w-10/12 mx-auto">
         <h5 className='text-orange text-sm tracking-wider my-5  '>SNEAKER COMPANY</h5>
