@@ -1,0 +1,55 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+*{
+  font-family: "Poppins",'sans-serif';
+}
+.img{
+  max-width: 100%;
+}
+.bottom-border::after {
+  content: '';
+  position: absolute;
+  top: 3.1rem;
+  left: 0;
+  /* bottom: 2px; Adjust as needed to match the thickness of the border */
+  /* width: var(--hover-width,100%);  */
+  width: 0;
+  height: 2px; /* Thickness of the hover effect */
+  background-color: hsl(26, 100%, 55%); /* Color of the hover effect */
+  transition: width 0.3s ease;
+}
+/* @media (max-width:700px) { */
+  .side-bar{
+    background-color:white ;
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100vh;
+    width: 60%;
+    gap: 3rem;
+    padding: 2rem 0 0 2rem;
+  }
+
+  .side-nav-links{
+    display: flex;
+    flex-direction: column ;
+    gap: .7rem ;
+    font-weight: 600;
+  }
+/* } */
+
+.side-bar{
+  display: flex;
+  flex-direction: column;
+}
+.bottom-border:hover::after{
+  width: 100%;
+}
+.one-px{
+  height: .5px;
+}
+.shadow{
+  box-shadow: 14px 28px 112px -14px rgba(0,0,0,0.64)
+}
