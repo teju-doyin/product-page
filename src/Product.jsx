@@ -4,8 +4,8 @@ import Button from './Button.jsx'
 import { useState } from 'react'
 
 const Product = ({handleAddToCart,itemCounter,handleRemove,handleAdd}) => {
-    
-    
+    const[toZero, setToZero]=useState(0)
+   
   return (
     <div className="product-container  w-10/12 mx-auto">
         <h5 className='text-orange text-sm tracking-wider my-5  '>SNEAKER COMPANY</h5>

@@ -1,10 +1,10 @@
 import { Outlet } from "react-router-dom"
 import NavBar from "../NavBar"
-const MainLayouts = ({cartNumber}) => {
+const MainLayouts = ({resetCart,cartNumber}) => {
 
   return (
     <>
-        <NavBar cartNumber={cartNumber}/>
+        <NavBar resetCart={resetCart} cartNumber={cartNumber}/>
         <Outlet/>
     </>
   )

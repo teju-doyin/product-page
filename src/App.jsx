@@ -15,11 +15,12 @@ function App() {
     setCartNumber(itemCounter)
     setItemCounter(0)
   }
+  const resetCart=()=> setCartNumber(0)
   const handleAdd =()=> setItemCounter(c=>itemCounter+1)
   const handleRemove =()=> setItemCounter(c=>itemCounter-1)
   const router = createBrowserRouter(
     createRoutesFromElements(
-      <Route path='/' element={<MainLayouts cartNumber={cartNumber}/>}>
+      <Route path='/' element={<MainLayouts resetCart={resetCart} cartNumber={cartNumber}/>}>
         <Route  index path='/' element={ <HomePage itemCounter={itemCounter} handleAddToCart={handleAddToCart} handleRemove={handleRemove} handleAdd={handleAdd}  /> }/>
         <Route  index path='/' element={ <CollectionsPage/> }/>
         <Route  index path='*' element={ <NotFoundPage/> }/>

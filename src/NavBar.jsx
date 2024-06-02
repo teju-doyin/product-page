@@ -9,33 +9,47 @@ import deleteIcon from './images/icon-delete.svg'
 import { NavLink } from 'react-router-dom'
 import { useState } from 'react'
 
-export default function NavBar({cartNumber}) {
+export default function NavBar({cartNumber,resetCart}) {
     const [showMenu, setShowMenu]= useState(false)
     const [message, setMessage]= useState('')
-    const [items, setItems] = useState(1)
+    const [items, setItems] = useState(cartNumber)
     const [showCartDetails, setShowCartDetails] = useState(false)
-    const [emptyCart, setEmptyCart] = useState(true)
+    const [emptyCart, setEmptyCart] = useState(false)
     const [isButtonVisible, setIsButtonVisible] = useState(true)
+   
     const handleEmptyCart=()=>{
-        setEmptyCart(!emptyCart)
-        setIsButtonVisible(!isButtonVisible)
+        
+        setEmptyCart(c=>false)
+        setIsButtonVisible(v=>false)
         setMessage(m=>'Your checkout was successful ')
-
-        setItems(0)
+        resetCart()
+       
 
     }
+    
     const handleDelete=()=>{
-        setEmptyCart(!emptyCart)
-        setIsButtonVisible(!isButtonVisible)
+        setEmptyCart(c=>false)
+        setIsButtonVisible(v=>false)
         setMessage(m=>'Your cart is empty ')
 
-        setItems(0)
+        resetCart()
 
     }
     const newcartNumber = cartNumber * 125
     const cartTotal = newcartNumber.toFixed(2)
     const handleOpenCart=()=>{
-        setShowCartDetails(c=>true)
+        
+        if(cartNumber===0){
+            setShowCartDetails(c=>true)
+            setEmptyCart(c=>false)
+            setIsButtonVisible(v=>false)
+            setMessage(m=>'You have no item in your cart')
+        }else{
+            setShowCartDetails(c=>true)
+            setEmptyCart(c=>true)
+            setIsButtonVisible(v=>true)
+        }
+
     }
     const handleCloseCart=()=>{
         setShowCartDetails(c=>false)
@@ -57,7 +71,7 @@ export default function NavBar({cartNumber}) {
             <div className="left-nav flex gap-5 basis-4/5 items-center justify-items-center">
                 <img className='cursor-pointer md:hidden' onClick={handleOpenMenu}  src={menuIcon} alt="" />
                 <span className="logo text-2xl font-semibold cursor-default">sneakers</span>
-                <div className={showMenu? "side-bar  transition-transform duration-300  ease transform translate-x-0": ''}>
+                <div className={`fixed side-bar top-0 left-0 h-full w-64 bg-white transform ${showMenu ? 'translate-x-0' : '-translate-x-full'} transition-transform duration-300 ease-in-out`}>
                      {/* side-bar side-nav-links*/}
                     <img className={!showMenu?'hidden':' cursor-pointer img w-5 '}onClick={handleCloseMenu} src={closeIcon} alt="" />
                     <ul className={showMenu? "side-nav-links ": '  hidden  relative   md:self-center md:flex md:justify-between md:gap-4  '}>
@@ -83,7 +97,7 @@ export default function NavBar({cartNumber}) {
                     <img onClick={handleCloseCart} width={15} className='cursor-pointer' src={closeIcon} alt="" />
                 </div>
                 <div className="line my-6 one-px bg-grayishBlue"></div>
-                { emptyCart? (
+                { emptyCart && cartNumber!==0 ? (
                     <div className=''>
                         <div className="cart-items mb-5 flex justify-between gap-5 items-center w-full mx-auto ">
                             <img className='img w-14 rounded' src={thumbnail} alt="" />
@@ -94,7 +108,7 @@ export default function NavBar({cartNumber}) {
                             <img className='img cursor-pointer ' onClick={handleDelete} src={deleteIcon} alt="" />
                         </div>
                     </div>
-
+                
                 ):(
                     
                     <p className='  text-darkGrayishBlue  font-semibold w-full py-10 flex justify-center'>{message}</p>
