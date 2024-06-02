@@ -8,20 +8,25 @@ import NotFoundPage from './pages/NotFoundPage.jsx'
 import { useState } from 'react'
 
 function App() {
-  const testText = 'this means lifting states works'
   const [itemCounter, setItemCounter] = useState(0)
   const [cartNumber,setCartNumber]= useState(0)
   const handleAddToCart=()=> {
     setCartNumber(itemCounter)
     setItemCounter(0)
+    
   }
   const resetCart=()=> setCartNumber(0)
+  const resetItemCounter =()=> setItemCounter(0)
   const handleAdd =()=> setItemCounter(c=>itemCounter+1)
-  const handleRemove =()=> setItemCounter(c=>itemCounter-1)
+  const handleRemove =()=> {
+    setItemCounter(c=>itemCounter-1)
+    if(itemCounter<=0) setItemCounter(0)
+
+  }
   const router = createBrowserRouter(
     createRoutesFromElements(
       <Route path='/' element={<MainLayouts resetCart={resetCart} cartNumber={cartNumber}/>}>
-        <Route  index path='/' element={ <HomePage itemCounter={itemCounter} resetCart={resetCart} handleAddToCart={handleAddToCart} handleRemove={handleRemove} handleAdd={handleAdd}  /> }/>
+        <Route  index path='/' element={ <HomePage itemCounter={itemCounter} resetItemCounter={resetItemCounter} handleAddToCart={handleAddToCart} handleRemove={handleRemove} handleAdd={handleAdd}  /> }/>
         <Route  index path='/' element={ <CollectionsPage/> }/>
         <Route  index path='*' element={ <NotFoundPage/> }/>
       </Route>

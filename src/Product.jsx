@@ -3,7 +3,7 @@ import plus from './images/icon-plus.svg'
 import Button from './Button.jsx'
 import { useState } from 'react'
 
-const Product = ({handleAddToCart,itemCounter,handleRemove,handleAdd}) => {
+const Product = ({resetItemCounter,handleAddToCart,itemCounter,handleRemove,handleAdd}) => {
     const[toZero, setToZero]=useState(0)
    
   return (
@@ -22,7 +22,7 @@ const Product = ({handleAddToCart,itemCounter,handleRemove,handleAdd}) => {
         <div>
             <div className="quantity flex py-3 mb-4  w-full mx-auto rounded-lg justify-around items-center bg-lightGrayishBlue">
                 <img className='cursor-pointer h-1 ' onClick={handleRemove} src={minus} alt="" />
-                <p className='font-semibold'>{ itemCounter<0? setItemCounter(0): itemCounter}</p>
+                <p className='font-semibold'>{ itemCounter}</p>
                 <img className='cursor-pointer h-3 ' onClick={handleAdd} src={plus} alt="" />
             </div>
             <Button onClick={handleAddToCart}>Add to cart</Button>
