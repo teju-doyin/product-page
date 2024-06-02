@@ -7,16 +7,27 @@ import Button from './Button.jsx'
 import thumbnail from './images/image-product-1-thumbnail.jpg'
 import deleteIcon from './images/icon-delete.svg'
 import { NavLink } from 'react-router-dom'
-import { useState } from 'react'
+import { useState,useEffect } from 'react'
 
 export default function NavBar({cartNumber,resetCart}) {
+
     const [showMenu, setShowMenu]= useState(false)
     const [message, setMessage]= useState('')
     const [items, setItems] = useState(cartNumber)
     const [showCartDetails, setShowCartDetails] = useState(false)
     const [emptyCart, setEmptyCart] = useState(false)
     const [isButtonVisible, setIsButtonVisible] = useState(true)
-   
+    const closeMenuOnResize = () => {
+        if (window.innerWidth >= 768) {
+            setShowMenu(false);
+        }
+      };
+    useEffect(() => {
+        window.addEventListener('resize', closeMenuOnResize);
+        return () => {
+          window.removeEventListener('resize', closeMenuOnResize);
+        }
+    }, [showMenu])
     const handleEmptyCart=()=>{
         
         setEmptyCart(c=>false)
@@ -55,7 +66,7 @@ export default function NavBar({cartNumber,resetCart}) {
         setShowCartDetails(c=>false)
     }
     const linkActive = ({isActive})=>
-            isActive? ' link-active ':'text-black  bottom-border relative' 
+            isActive? ' link-active ':'text-black  md:bottom-border md:after:bottom-border md:after:content-[""] relative' 
     const handleOpenMenu=()=> {
         setShowMenu(o=>!showMenu)
     }
@@ -71,10 +82,10 @@ export default function NavBar({cartNumber,resetCart}) {
             <div className="left-nav flex gap-5 basis-4/5 items-center justify-items-center">
                 <img className='cursor-pointer md:hidden' onClick={handleOpenMenu}  src={menuIcon} alt="" />
                 <span className="logo text-2xl font-semibold cursor-default">sneakers</span>
-                <div className={`fixed side-bar top-0 left-0 h-full w-64 bg-white transform ${showMenu ? 'translate-x-0 filter backdrop-blur-sm ' : '-translate-x-full'} transition-transform duration-300 ease-in-out`}>
+                <div className={`md:relative transition ${showMenu? 'side-bar translate-x-0 ':'-translate-x-full'} transition-transform duration-300 ease-in-out`}>
                      {/* side-bar side-nav-links*/}
                     <img className={!showMenu?'hidden':' cursor-pointer img w-5 '}onClick={handleCloseMenu} src={closeIcon} alt="" />
-                    <ul className={showMenu? "side-nav-links ": '  hidden  relative   md:self-center md:flex md:justify-between md:gap-4  '}>
+                    <ul className={showMenu? "side-nav-links ": '  hidden  md:absolute md:-top-2.5   md:self-center md:flex md:justify-between md:gap-4  '}>
                         <NavLink onClick={()=>setShowMenu(false)}   className={linkActive} to='/'>Collections</NavLink>
                         <NavLink onClick={()=>setShowMenu(false)} className={linkActive} to="/men-page">Men</NavLink>
                         <NavLink onClick={()=>setShowMenu(false)}  className={linkActive} to="/women-page">Women</NavLink>
@@ -91,7 +102,7 @@ export default function NavBar({cartNumber,resetCart}) {
                 <img className=' img w-8 rounded-2xl border border-solid hover:border-orange cursor-pointer transition delay-75' src={avatar} alt="avatar" />
             </div>
         </div>
-        <div className={showCartDetails? 'shadow top-16 bg-white right-3 absolute w-[14rem] px-4 md:w-[20rem] z-50 rounded-xl py-5':'hidden'}>
+        <div className={showCartDetails? 'shadow top-16 bg-white right-3 absolute w-[17rem] px-4 md:w-[20rem] z-50 rounded-xl py-5':'hidden'}>
                 <div className="flex justify-between items-center">
                     <h5 className='text-black font-semibold ml-3' >Cart</h5>
                     <img onClick={handleCloseCart} width={15} className='cursor-pointer' src={closeIcon} alt="" />
@@ -111,7 +122,7 @@ export default function NavBar({cartNumber,resetCart}) {
                 
                 ):(
                     
-                    <p className='  text-darkGrayishBlue text-center  font-medium w-full py-10 flex justify-center'>{message}</p>
+                    <p className='  text-darkGrayishBlue  font-semibold w-full py-10 flex justify-center'>{message}</p>
                 )
 
                 }

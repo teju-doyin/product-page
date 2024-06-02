@@ -13,14 +13,20 @@
   position: absolute;
   top: 3.1rem;
   left: 0;
-  /* bottom: 2px; Adjust as needed to match the thickness of the border */
-  /* width: var(--hover-width,100%);  */
   width: 0;
-  height: 2px; /* Thickness of the hover effect */
-  background-color: hsl(26, 100%, 55%); /* Color of the hover effect */
+  height: 2px;
+  background-color: hsl(26, 100%, 55%);
   transition: width 0.3s ease;
 }
-/* @media (max-width:700px) { */
+@media screen and(max-width:800px) {
+  nav{
+    background-color: pink !important;
+  }
+  .bottom-border::after{
+    display: none !important;
+    background-color: white;
+  }
+}
 .side-bar{
   background-color:white ;
   position: absolute;

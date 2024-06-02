@@ -1,12 +1,12 @@
 import Product from '../Product.jsx'
 import Cart from '../Cart.jsx'
 
-const HomePage = ({ handleAddToCart,itemCounter,handleRemove,handleAdd}) => {
+const HomePage = ({ resetCart,handleAddToCart,itemCounter,handleRemove,handleAdd}) => {
  
   return (
     <>
       <Cart />
-      <Product  itemCounter={itemCounter} handleAddToCart={handleAddToCart} handleRemove={handleRemove} handleAdd={handleAdd} />
+      <Product resetCart={resetCart} itemCounter={itemCounter} handleAddToCart={handleAddToCart} handleRemove={handleRemove} handleAdd={handleAdd} />
     </>
   )
 }
