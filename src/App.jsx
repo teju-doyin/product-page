@@ -26,7 +26,7 @@ function App() {
   const router = createBrowserRouter(
     createRoutesFromElements(
       <Route path='/' element={<MainLayouts resetCart={resetCart} cartNumber={cartNumber}/>}>
-        <Route  index path='/' element={ <HomePage itemCounter={itemCounter} resetItemCounter={resetItemCounter} handleAddToCart={handleAddToCart} handleRemove={handleRemove} handleAdd={handleAdd}  /> }/>
+        <Route  index path='/' element={ <HomePage itemCounter={itemCounter}  handleAddToCart={handleAddToCart} handleRemove={handleRemove} handleAdd={handleAdd}  /> }/>
         <Route  index path='/' element={ <CollectionsPage/> }/>
         <Route  index path='*' element={ <NotFoundPage/> }/>
       </Route>

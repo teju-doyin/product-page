@@ -3,8 +3,7 @@ import plus from './images/icon-plus.svg'
 import Button from './Button.jsx'
 import { useState } from 'react'
 
-const Product = ({resetItemCounter,handleAddToCart,itemCounter,handleRemove,handleAdd}) => {
-    const[toZero, setToZero]=useState(0)
+const Product = ({handleAddToCart,itemCounter,handleRemove,handleAdd}) => {
    
   return (
     <div className="product-container  w-10/12 mx-auto">
