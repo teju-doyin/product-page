@@ -122,7 +122,7 @@ export default function NavBar({cartNumber,resetCart}) {
                 
                 ):(
                     
-                    <p className='  text-darkGrayishBlue  font-semibold w-full py-10 flex justify-center'>{message}</p>
+                    <p className='  text-darkGrayishBlue text-center  font-semibold w-full py-10 flex justify-center'>{message}</p>
                 )
 
                 }
